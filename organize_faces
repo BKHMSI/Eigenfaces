@@ -1,0 +1,8 @@
+#!/bin/bash  
+for entry in "yalefaces"/*
+do
+  mkdir -p "yalefaces/${entry:17:2}"
+  mv "$entry" "yalefaces/${entry:17:2}"
+done
+
+rm -r 'yalefaces/tx'
