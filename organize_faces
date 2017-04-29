@@ -1,8 +1,9 @@
-#!/bin/bash  
+#!/bin/bash 
+
+rm 'yalefaces/subject01.glasses.gif' 
 for entry in "yalefaces"/*
 do
   mkdir -p "yalefaces/${entry:17:2}"
   mv "$entry" "yalefaces/${entry:17:2}"
 done
-
 rm -r 'yalefaces/tx'
