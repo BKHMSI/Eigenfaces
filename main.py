@@ -20,6 +20,16 @@ X_mean = np.zeros(img_dim, dtype='uint8')
 EPSIOLON_ID = 10
 EPSIOLON_DETECT = 2
 
+def subplot(X, Y):
+    fig = plt.figure()
+    a = fig.add_subplot(1,2,1)
+    imgplot = plt.imshow(Y, cmap='gray')
+    a.set_title('Prediction')
+    a = fig.add_subplot(1,2,2)
+    imgplot = plt.imshow(X,cmap='gray')
+    a.set_title('Ground Truth')
+    plt.show()
+
 def imshow(img, gray = True, title=''):
     plt.title(title)
     plt.imshow(img, cmap='gray') if gray else plt.imshow(img)
@@ -102,15 +112,18 @@ def predict(img, X, Ur, X_mean, Y_train):
 X_train, Y_train = read_data()
 X, Ur, X_mean = train(X_train)
 
-test = X_train[99]
-#test = np.random.rand(*img_dim)
+#test = X_train[99] # face
+#test = np.random.rand*img_dim) # noise
+test = plt.imread('building.jpg') # not face
+test = plt.im
+test = imresize(test, img_dim)
+imshow(test)
 pred = predict(test, X, Ur, X_mean, Y_train)
 
 test = test.reshape(img_dim)
 img = X_train[pred].reshape(img_dim)
 
-imshow(test)
-imshow(img)
+subplot(img,test)
 
 # Show Results
 X_mean = X_mean.reshape(img_dim)
