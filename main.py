@@ -4,23 +4,23 @@ import cv2 as cv
 import matplotlib.pyplot as plt
 import os 
 from scipy.misc import imresize
-
+from preprocessing import facechop, histogram_eq
 
 
 DATA_PATH = '/Users/BAlKhamissi/Documents/Datasets/yalefaces'
 num_faces = 10
 num_per_face = 11
 num_images = num_faces * num_per_face
-m = 60
-n = 80
+m = 70
+n = 70
 img_dim = (m,n)
 input_dim = (num_images, img_dim[0], img_dim[1])
 X_train = np.zeros(input_dim, dtype='uint8')
 Y_train = np.zeros(num_images)
 X_mean = np.zeros(img_dim, dtype='uint8')
 
-EPSIOLON_ID = 2900
-EPSIOLON_DETECT = 2
+EPSIOLON_ID = 1000
+EPSIOLON_DETECT = 2000
 
 def subplot(X, Y):
     fig = plt.figure()
@@ -41,15 +41,12 @@ def get_noise():
     return np.random.rand(m,n)
 
 def get_unknown_face():
-    path = os.path.join(DATA_PATH, "12/subject12.normal")
-    img = plt.imread(path, 0)
-    img = imresize(img, img_dim)
-    imshow(img)
+    # path = os.path.join(DATA_PATH, "12/subject12.normal")
+    img = plt.imread('images/unknown.jpg')
     return img
 
 def get_building():
-    img = cv.imread('building.jpg', 0)
-    img = imresize(img, img_dim)
+    img = cv.imread('images/building.jpg', 0)
     return img
 
 # Step 1
@@ -59,9 +56,10 @@ def read_data():
         for i, file in enumerate(os.listdir(face_path)):
             file_path = os.path.join(face_path, file)
             img = plt.imread(file_path, 0)
-            img = imresize(img, img_dim)
             idx = face*num_per_face+i
-            X_train[idx] = img
+            img = facechop(img)
+            img = histogram_eq(img)
+            X_train[idx] = imresize(img, img_dim)
             Y_train[idx] = face
     return X_train, Y_train
 
@@ -109,6 +107,14 @@ def predict(img, X, Ur, X_mean, Y_train):
         print("Uknown Face")
         return -1
 
+def preprocess(img):
+    img = facechop(img)
+    if len(img.shape) > 2:
+        img = cv.cvtColor(img,cv.COLOR_RGB2GRAY)
+    img = histogram_eq(img)
+    img = imresize(img, img_dim)
+    return img
+
 
 X_train, Y_train = read_data()
 X, Ur, X_mean = train(X_train)
@@ -116,6 +122,10 @@ X, Ur, X_mean = train(X_train)
 # test = X_train[56] # face
 # test = get_noise() 
 test = get_unknown_face()
+
+
+test = preprocess(test)
+print("Test Image: ", test.shape)
 # test = get_building()
 pred = predict(test, X, Ur, X_mean, Y_train)
 
