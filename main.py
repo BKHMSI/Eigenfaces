@@ -148,3 +148,4 @@ else:
 # Show Results
 X_mean = X_mean.reshape(img_dim)
 imshow(X_mean, title='Mean Image')
+
