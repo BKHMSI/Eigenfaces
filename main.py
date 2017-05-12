@@ -7,7 +7,7 @@ from scipy.misc import imresize
 from preprocessing import facechop, histogram_eq
 
 
-DATA_PATH = '/Users/BAlKhamissi/Documents/Datasets/yalefaces'
+DATA_PATH = 'D:/A2/Data/yalefaces'
 num_faces = 10
 num_per_face = 11
 num_images = num_faces * num_per_face
@@ -137,3 +137,4 @@ if pred not in (-1, 0):
 # Show Results
 X_mean = X_mean.reshape(img_dim)
 imshow(X_mean, title='Mean Image')
+
