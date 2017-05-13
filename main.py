@@ -11,8 +11,9 @@ DATA_PATH = 'D:/A2/Data/yalefaces'
 num_faces = 10
 num_per_face = 11
 num_images = num_faces * num_per_face
-m = 70
-n = 70
+# original images 320 * 243
+m = 100
+n = 100
 img_dim = (m,n)
 input_dim = (num_images, img_dim[0], img_dim[1])
 X_train = np.zeros(input_dim, dtype='uint8')
@@ -21,6 +22,10 @@ X_mean = np.zeros(img_dim, dtype='uint8')
 
 EPSIOLON_ID = 1000
 EPSIOLON_DETECT = 2000
+
+imgx = cv.imread('images/unknown.jpg', 0)
+print(imgx)
+gg = input("foo")
 
 def subplot(X, Y):
     fig = plt.figure()
@@ -96,12 +101,13 @@ def predict(img, X, Ur, X_mean, Y_train):
         return 0
     # end detect face
 
+    # What is this part?
     D = X - x*np.ones((1,X.shape[0]))
     d = np.sqrt(np.diag(D.T.dot(D)))
     d_idx = np.argmin(d)
-    print("d: ", d[d_idx])
+    print("d:", d[d_idx])
     if d[d_idx] < EPSIOLON_ID:
-        print("This is Face #", Y_train[d_idx])
+        print(f"Face detected and IDed as #{Y_train[d_idx]}")
         return d_idx
     else:
         print("Uknown Face")
@@ -110,7 +116,7 @@ def predict(img, X, Ur, X_mean, Y_train):
 def preprocess(img):
     img = facechop(img)
     if len(img.shape) > 2:
-        img = cv.cvtColor(img,cv.COLOR_RGB2GRAY)
+        img = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
     img = histogram_eq(img)
     img = imresize(img, img_dim)
     return img
@@ -129,7 +135,7 @@ print("Test Image: ", test.shape)
 # test = get_building()
 pred = predict(test, X, Ur, X_mean, Y_train)
 
-if pred not in (-1, 0):
+if pred not in {-1, 0}:
     test = test.reshape(img_dim)
     img = X_train[pred].reshape(img_dim)
     subplot(test,img)
