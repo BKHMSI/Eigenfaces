@@ -8,7 +8,7 @@ from preprocessing import facechop, histogram_eq
 
 
 DATA_PATH = '/Users/BAlKhamissi/Documents/Datasets/yalefaces'
-num_faces = 15
+num_faces = 16
 num_per_face = 11
 num_images = num_faces * num_per_face
 m = 70
@@ -59,6 +59,8 @@ def read_data():
             file_path = os.path.join(face_path, file)
             img = plt.imread(file_path, 0)
             img = facechop(img)
+            if len(img.shape) > 2:
+                img = cv.cvtColor(img,cv.COLOR_RGB2GRAY)
             img = histogram_eq(img)
             if(i <= 9):
                 X_train[t_idx] = imresize(img, img_dim)
@@ -121,18 +123,30 @@ def preprocess(img):
     img = imresize(img, img_dim)
     return img
 
+def plot_base_faces(U, size):
+    plt.title("Base Faces")
+    for i in range(size):
+        for j in range(size):
+            plt.subplot(size, size, i*size+j+1)
+            u = U[:, i*size+j].reshape(img_dim)
+            plt.imshow(u, cmap='gray')
+            plt.axis('off')
+    plt.show()
 
 X_train, Y_train, X_val = read_data()
 
 X, Ur, X_mean = train(X_train)
+
 
 # test = X_train[56] # face
 # test = get_noise() 
 # test = get_unknown_face()
 # test = get_building()
 try:
-    #test = preprocess(test)
-    pred = predict(X_val[i], X, Ur, X_mean, Y_train)
+    test = plt.imread('images/muhamed.jpg')
+    test = preprocess(test)
+    #test = X_val[12]
+    pred = predict(test, X, Ur, X_mean, Y_train)
 except:
     pred = -2
 
@@ -146,6 +160,7 @@ else:
     imshow(test, title="Not a Face")
 
 # Show Results
+plot_base_faces(Ur, 5)
 X_mean = X_mean.reshape(img_dim)
 imshow(X_mean, title='Mean Image')
 
