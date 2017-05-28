@@ -7,7 +7,7 @@ from scipy.misc import imresize
 from preprocessing import facechop, histogram_eq
 
 
-DATA_PATH = '/Users/BAlKhamissi/Documents/Datasets/yalefaces'
+DATA_PATH = ''
 num_faces = 16
 num_per_face = 11
 num_images = num_faces * num_per_face
@@ -23,10 +23,6 @@ Y_train = np.zeros(num_images)
 
 EPSIOLON_ID = 3000
 EPSIOLON_DETECT = 2400
-
-imgx = cv.imread('images/unknown.jpg', 0)
-print(imgx)
-gg = input("foo")
 
 def subplot(X, Y):
     fig = plt.figure()
@@ -47,8 +43,7 @@ def get_noise():
     return np.random.rand(m,n)
 
 def get_unknown_face():
-    img = plt.imread('images/badr.jpg')
-    #img = plt.imread('images/unknown.jpg')
+    img = plt.imread('images/unknown.jpg')
     return img
 
 def get_building():
@@ -139,10 +134,10 @@ def plot_base_faces(U, size):
             plt.axis('off')
     plt.show()
 
+
 X_train, Y_train, X_val = read_data()
 
 X, Ur, X_mean = train(X_train)
-
 
 # test = X_train[56] # face
 # test = get_noise() 
@@ -169,4 +164,3 @@ else:
 plot_base_faces(Ur, 5)
 X_mean = X_mean.reshape(img_dim)
 imshow(X_mean, title='Mean Image')
-
