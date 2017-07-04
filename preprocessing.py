@@ -5,7 +5,7 @@ def histogram_eq(img):
     return cv2.equalizeHist(img)
 
 def facechop(img):  
-    facedata = "haarcascade_frontalface_default.xml"
+    facedata = "haarcascade.xml"
     cascade = cv2.CascadeClassifier(facedata)
 
     minisize = (img.shape[1],img.shape[0])
