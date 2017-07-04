@@ -29,7 +29,7 @@ without any compression) uses mixes of the colors Red, Green and Blue
 wherein the value “0” represents total absence of the color and some
 maximum value represents the highest vibrance the encoding system can
 afford the color. In this way the representation is describable as a
-2-ary function *I : D_w x D_h -> R$ where *I(x_i, y_j)=r_ij* for
+2-ary function *I : D_w x D_h -> R* where *I(x_i, y_j)=r_ij* for
 *D_w, D_h* being the ranges of the dimensions of the image, assumed
 henceforth to refer to width and height, respectively, and *R* the
 vector space of the representation for every individual pixel.
