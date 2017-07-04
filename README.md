@@ -36,7 +36,7 @@ vector space of the representation for every individual pixel.
 
 **Example:** for a grayscale (one color, gray) image of dimensions
 60cm x 40cm, a resolution of 72px/cm^2 and a pixel representation of a number on the discrete range {0, ..255},
-the function corresponding to the image would be defined as *I* : {1, ..60 x 72} x {1, ..40x72\} -> {0, ..255}.
+the function corresponding to the image would be defined as *I* : {1, ..60 x 72} x {1, ..40x72} -> {0, ..255}.
 
 Concepts
 ========
