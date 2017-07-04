@@ -51,7 +51,7 @@ We consider Singular Value Decomposition when applied to real-valued
 *m x n* matrices (we try to deal as much as we can with only square
 matrices to make things uniform for our algorithm). This gives us an
 orthornormal basis for the column space of the covariance matrix of our
-data matrix **A***(m x n)* (where **A'** = **A** - mean(**A**)) in the form of **U** in
+data matrix **A** *(m x n)* (where **A'** = **A** - mean(**A**)) in the form of **U** in
 
 <p align="center"><img src="images/eq_1.png"></p>
 
@@ -113,7 +113,7 @@ Appendix A
 ==========
 
 <table>
-  <tr><td align="center"><img src="images/appendix_1.png"></td></tr>
-  <tr><td align="center"><img src="images/appendix_2.png"></td></tr>
+   <tr><td align="center"><img src="images/appendix_2.png"></td></tr>
+   <tr><td align="center"><img src="images/appendix_1.png"></td></tr>
 </table>
 
