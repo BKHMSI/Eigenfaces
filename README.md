@@ -1,3 +1,10 @@
+Quick Start 
+---------------------------
+
+Download Yalefaces Dataset: http://vision.ucsd.edu/content/yale-face-database
+
+Run organize_faces.sh to organize faces into subfolders 
+
 Introduction
 ============
 
@@ -28,10 +35,8 @@ henceforth to refer to width and height, respectively, and *R* the
 vector space of the representation for every individual pixel.
 
 **Example:** for a grayscale (one color, gray) image of dimensions
-60cm x 40cm, a resolution of 72px/cm^2 and a
-pixel representation of a number on the discrete range {0, ..255},
-the function corresponding to the image would be defined as
-*I* : {1, ..60 x 72} x {1, ..40x72\} -> {0, ..255}.
+60cm x 40cm, a resolution of 72px/cm^2 and a pixel representation of a number on the discrete range {0, ..255},
+the function corresponding to the image would be defined as *I* : {1, ..60 x 72} x {1, ..40x72\} -> {0, ..255}.
 
 Concepts
 ========
@@ -46,9 +51,9 @@ We consider Singular Value Decomposition when applied to real-valued
 *m x n* matrices (we try to deal as much as we can with only square
 matrices to make things uniform for our algorithm). This gives us an
 orthornormal basis for the column space of the covariance matrix of our
-data matrix **A&& *(m x n)* (where **A'** = **A** - mean((**A**) in the form of **U** in
+data matrix **A***(m x n)* (where **A'** = **A** - mean(**A**)) in the form of **U** in
 
-![alt text][eq_1]
+<p align="center"><img src="images/eq_1.png"></p>
 
 This is the basis for PCA.
 
@@ -61,10 +66,10 @@ By finding this best representation on the given ‘training’ dataset, we
 can define a new subset of our eigenspace that best recognizes what the
 data primarily represents (in this case, faces). The earliest
 coordinates would come to represent the most important ‘features’
-observed in the original data. (See figures 2, 3.)
+observed in the original data. (See Figures 2, 3.)
 We’ll call this representation projection space the *Face Space*, given that it best represents faces. (See Figure 5.)
 
-![alt text][algo_1]
+<p align="center"><img src="images/algo_1.png"></p>
 
 Eigen Faces
 ===========
@@ -95,32 +100,20 @@ We can then compare the distance to the projections of each of our training face
 Algorithms
 ----------
 
-![alt text][algos_2_3]
+<p align="center"><img src="images/algos_2_3.png"></p>
 
 Conclusion
 ==========
 
-![alt text][test_img]
+<p align="center"><img src="images/test_img.png"></p>
 
 It works.
 
 Appendix A
 ==========
 
-![Original data][fig_pca2]
-
-![De-correlated][fig_pca1]
-
-![Mean of our dataset][mean_face]
-
-![Base Faces corresponding to extracted principal components][base_faces]
-
-[fig_pca2]: https://github.com/BKHMSI/Eigenfaces/tree/master/images/pca_2.png "Original Data"
-[fig_pca1]: https://github.com/BKHMSI/Eigenfaces/tree/master/images/pca_1.png "De-correlated"
-[mean_face]: https://github.com/BKHMSI/Eigenfaces/tree/master/images/mean_face.png "Mean Face"
-[base_faces]: https://github.com/BKHMSI/Eigenfaces/tree/master/images/base_faces.png "Base Faces"
-[test_img]: https://github.com/BKHMSI/Eigenfaces/tree/master/images/test_img.png "Test Image"
-[eq_1]: https://github.com/BKHMSI/Eigenfaces/tree/master/images/eq_1.png "Equation 1"
-[algo_1]: https://github.com/BKHMSI/Eigenfaces/tree/master/images/algo_1.png "Algorithm 1"
-[algos_2_3]: https://github.com/BKHMSI/Eigenfaces/tree/master/images/algos_2_3.png "Algorithms 2 & 3"
+<table>
+  <tr><td align="center"><img src="images/appendix_1.png"></td></tr>
+  <tr><td align="center"><img src="images/appendix_2.png"></td></tr>
+</table>
 
